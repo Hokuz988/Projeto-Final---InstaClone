@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instaclone API — Swagger UI</title>
+  <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist@5/swagger-ui.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f0f0f;
+    }
+
+    #header {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      padding: 18px 32px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+
+    #header svg {
+      width: 36px;
+      height: 36px;
+      fill: #fff;
+      flex-shrink: 0;
+    }
+
+    #header h1 {
+      color: #fff;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    #header p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    #swagger-ui {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px 48px;
+    }
+
+    .swagger-ui .topbar { display: none; }
+    .swagger-ui .info { margin: 28px 0 8px; }
+    .swagger-ui .info .title { color: #f0f0f0; }
+    .swagger-ui .info .description p,
+    .swagger-ui .info li,
+    .swagger-ui .info p { color: #ccc; }
+    .swagger-ui .scheme-container {
+      background: #1a1a1a;
+      box-shadow: none;
+      border-bottom: 1px solid #333;
+      padding: 12px 0;
+    }
+    .swagger-ui .opblock-tag {
+      border-bottom: 1px solid #2a2a2a;
+      color: #eee;
+    }
+    .swagger-ui .opblock-tag:hover { background: #1c1c1c; }
+    .swagger-ui .opblock {
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 6px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+    .swagger-ui .opblock .opblock-summary-description { color: #ccc; }
+    .swagger-ui section.models { display: none; }
+    .swagger-ui .btn.authorize {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d);
+      border: none;
+      color: #fff;
+    }
+    .swagger-ui .btn.authorize:hover { opacity: 0.85; }
+    .swagger-ui select,
+    .swagger-ui input[type=text],
+    .swagger-ui input[type=password],
+    .swagger-ui textarea {
+      background: #1e1e1e;
+      color: #f0f0f0;
+      border: 1px solid #444;
+    }
+    .swagger-ui .model-box { background: #1a1a1a; }
+  </style>
+</head>
+<body>
+
+<div id="header">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069
+             1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919
+             4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699
+             -4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227
+             1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259
+             0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073
+             1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98
+             6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2
+             6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667
+             -.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0
+             5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759
+             6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4
+             0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796
+             0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s
+             -.644-1.44-1.439-1.44z"/>
+  </svg>
+  <div>
+    <h1>Instaclone API</h1>
+    <p>OpenAPI 3.0 · Laravel 12 · Sanctum auth</p>
+  </div>
+</div>
+
+<div id="swagger-ui"></div>
+
+<script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-bundle.js"></script>
+<script src="https://unpkg.com/swagger-ui-dist@5/swagger-ui-standalone-preset.js"></script>
+<script>
+const spec = {
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Instaclone API",
+    "version": "1.0.0",
+    "description": "REST API for the Instaclone application (Instagram clone)"
+  },
+  "servers": [
+    { "url": "http://localhost:8080/api", "description": "Local development server" }
+  ],
+  "security": [],
+  "components": {
+    "securitySchemes": {
+      "sanctum": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Token",
+        "description": "Laravel Sanctum token. Obtain via POST /auth/login"
+      }
+    },
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "John Doe" },
+          "username": { "type": "string", "example": "johndoe" },
+          "email": { "type": "string", "format": "email", "example": "john@example.com" },
+          "bio": { "type": "string", "nullable": true, "example": "Hello world" },
+          "avatar_url": { "type": "string", "nullable": true, "example": "http://localhost:8000/storage/avatars/1.jpg" },
+          "created_at": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Post": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "user_id": { "type": "integer", "example": 1 },
+          "caption": { "type": "string", "nullable": true, "example": "Beautiful sunset" },
+          "image_url": { "type": "string", "example": "http://localhost:8000/storage/posts/1.jpg" },
+          "likes_count": { "type": "integer", "example": 42 },
+          "comments_count": { "type": "integer", "example": 5 },
+          "liked_by_me": { "type": "boolean", "example": false },
+          "created_at": { "type": "string", "format": "date-time" },
+          "user": { "$ref": "#/components/schemas/User" }
+        }
+      },
+      "Comment": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "post_id": { "type": "integer", "example": 1 },
+          "user_id": { "type": "integer", "example": 1 },
+          "body": { "type": "string", "example": "Great photo!" },
+          "created_at": { "type": "string", "format": "date-time" },
+          "user": { "$ref": "#/components/schemas/User" }
+        }
+      },
+      "Paginated": {
+        "type": "object",
+        "properties": {
+          "current_page": { "type": "integer", "example": 1 },
+          "last_page": { "type": "integer", "example": 5 },
+          "per_page": { "type": "integer", "example": 15 },
+          "total": { "type": "integer", "example": 73 },
+          "from": { "type": "integer", "example": 1 },
+          "to": { "type": "integer", "example": 15 },
+          "next_page_url": { "type": "string", "nullable": true },
+          "prev_page_url": { "type": "string", "nullable": true }
+        }
+      },
+      "PaginatedUsers": {
+        "allOf": [
+          { "$ref": "#/components/schemas/Paginated" },
+          { "type": "object", "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/User" } } } }
+        ]
+      },
+      "PaginatedPosts": {
+        "allOf": [
+          { "$ref": "#/components/schemas/Paginated" },
+          { "type": "object", "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Post" } } } }
+        ]
+      },
+      "PaginatedComments": {
+        "allOf": [
+          { "$ref": "#/components/schemas/Paginated" },
+          { "type": "object", "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/Comment" } } } }
+        ]
+      },
+      "MessageResponse": {
+        "type": "object",
+        "properties": { "message": { "type": "string", "example": "Success" } }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string", "example": "The given data was invalid." },
+          "errors": {
+            "type": "object",
+            "additionalProperties": { "type": "array", "items": { "type": "string" } },
+            "example": { "email": ["The email field is required."] }
+          }
+        }
+      }
+    },
+    "responses": {
+      "Unauthenticated": {
+        "description": "Unauthenticated",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Unauthenticated." } } }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Post not found." } } }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Forbidden." } } }
+      },
+      "MethodNotAllowed": {
+        "description": "Method not allowed",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Method not allowed." } } }
+      },
+      "ValidationError": {
+        "description": "Validation error",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ValidationError" }, "example": { "message": "Validation error.", "errors": { "email": ["The email field is required."] } } } }
+      }
+    }
+  },
+  "tags": [
+    { "name": "Auth",     "description": "Registration, login, logout, current user" },
+    { "name": "Users",    "description": "User profiles and avatar" },
+    { "name": "Follows",  "description": "Follow / unfollow users" },
+    { "name": "Feed",     "description": "Personalized post feed" },
+    { "name": "Posts",    "description": "Create, read, update, delete posts" },
+    { "name": "Likes",    "description": "Like and unlike posts" },
+    { "name": "Comments", "description": "Post comments" }
+  ],
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": ["Auth"], "summary": "Register a new user",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": {
+            "type": "object",
+            "required": ["name","username","email","password","password_confirmation"],
+            "properties": {
+              "name": { "type": "string", "maxLength": 255, "example": "John Doe" },
+              "username": { "type": "string", "maxLength": 255, "pattern": "^[a-zA-Z0-9_]+$", "example": "johndoe" },
+              "email": { "type": "string", "format": "email", "example": "john@example.com" },
+              "password": { "type": "string", "minLength": 8, "example": "secret123" },
+              "password_confirmation": { "type": "string", "example": "secret123" }
+            }
+          }}}
+        },
+        "responses": {
+          "201": { "description": "User registered", "content": { "application/json": { "schema": { "type": "object", "properties": { "user": { "$ref": "#/components/schemas/User" }, "access_token": { "type": "string", "example": "1|abc123token" } } } } } },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"], "summary": "Login and receive a token",
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": {
+            "type": "object",
+            "required": ["email","password"],
+            "properties": {
+              "email": { "type": "string", "format": "email", "example": "john@example.com" },
+              "password": { "type": "string", "example": "secret123" }
+            }
+          }}}
+        },
+        "responses": {
+          "200": { "description": "Login successful", "content": { "application/json": { "schema": { "type": "object", "properties": { "user": { "$ref": "#/components/schemas/User" }, "access_token": { "type": "string", "example": "1|abc123token" } } } } } },
+          "401": { "description": "Invalid credentials", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Invalid credentials." } } } },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": ["Auth"], "summary": "Logout (revoke current token)",
+        "security": [{ "sanctum": [] }],
+        "responses": {
+          "200": { "description": "Logged out", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Logout realizado com sucesso." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/auth/me": {
+      "get": {
+        "tags": ["Auth"], "summary": "Get the authenticated user",
+        "security": [{ "sanctum": [] }],
+        "responses": {
+          "200": { "description": "Authenticated user", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/feed": {
+      "get": {
+        "tags": ["Feed"], "summary": "Get paginated feed of followed users' posts",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 10, "maximum": 50 } }],
+        "responses": {
+          "200": { "description": "Feed posts", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedPosts" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/posts": {
+      "post": {
+        "tags": ["Posts"], "summary": "Create a new post",
+        "security": [{ "sanctum": [] }],
+        "requestBody": {
+          "required": true,
+          "content": { "multipart/form-data": { "schema": {
+            "type": "object", "required": ["image"],
+            "properties": {
+              "image": { "type": "string", "format": "binary", "description": "Image file (max 5 MB)" },
+              "caption": { "type": "string", "maxLength": 2200, "nullable": true, "example": "Beautiful sunset" }
+            }
+          }}}
+        },
+        "responses": {
+          "201": { "description": "Post created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Post" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/posts/{id}": {
+      "get": {
+        "tags": ["Posts"], "summary": "Get a single post",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Post with comments and like status", "content": { "application/json": { "schema": { "allOf": [{ "$ref": "#/components/schemas/Post" }, { "type": "object", "properties": { "comments": { "type": "array", "items": { "$ref": "#/components/schemas/Comment" } } } }] } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "put": {
+        "tags": ["Posts"], "summary": "Update post caption (owner only)",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object", "properties": { "caption": { "type": "string", "maxLength": 2200, "nullable": true, "example": "Updated caption" } } } } }
+        },
+        "responses": {
+          "200": { "description": "Updated post", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Post" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "delete": {
+        "tags": ["Posts"], "summary": "Delete a post (owner only)",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Post deleted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Post deletado." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/posts/{id}/like": {
+      "post": {
+        "tags": ["Likes"], "summary": "Like a post",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Post liked", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Curtido." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/posts/{id}/unlike": {
+      "delete": {
+        "tags": ["Likes"], "summary": "Unlike a post",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Post unliked", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Descurtido." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/posts/{id}/likes": {
+      "get": {
+        "tags": ["Likes"], "summary": "List users who liked a post",
+        "security": [{ "sanctum": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } },
+          { "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 20, "maximum": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "Paginated list of users who liked", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedUsers" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/posts/{id}/comments": {
+      "get": {
+        "tags": ["Comments"], "summary": "List comments on a post",
+        "security": [{ "sanctum": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } },
+          { "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 10, "maximum": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "Paginated comments", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedComments" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "post": {
+        "tags": ["Comments"], "summary": "Add a comment to a post",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object", "required": ["body"], "properties": { "body": { "type": "string", "maxLength": 1000, "example": "Great photo!" } } } } }
+        },
+        "responses": {
+          "201": { "description": "Comment created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Comment" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "put": {
+        "tags": ["Comments"], "summary": "Update a comment (owner only)",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "type": "object", "required": ["body"], "properties": { "body": { "type": "string", "maxLength": 1000, "example": "Updated comment text" } } } } }
+        },
+        "responses": {
+          "200": { "description": "Updated comment", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Comment" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "delete": {
+        "tags": ["Comments"], "summary": "Delete a comment (owner only)",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Comment deleted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Comentário deletado." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "403": { "$ref": "#/components/responses/Forbidden" },
+          "405": { "$ref": "#/components/responses/MethodNotAllowed" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/users/search": {
+      "get": {
+        "tags": ["Users"], "summary": "Search users by username or name",
+        "security": [{ "sanctum": [] }],
+        "parameters": [
+          { "name": "q", "in": "query", "required": true, "schema": { "type": "string", "minLength": 1 }, "example": "john" },
+          { "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 15, "maximum": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "Search results", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedUsers" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/users/suggestions": {
+      "get": {
+        "tags": ["Users"], "summary": "Get suggested users to follow",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 20, "maximum": 50 } }],
+        "responses": {
+          "200": { "description": "Suggested users", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedUsers" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/users/me": {
+      "delete": {
+        "tags": ["Users"], "summary": "Delete authenticated user's account",
+        "security": [{ "sanctum": [] }],
+        "responses": {
+          "200": { "description": "Account deleted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Conta deletada com sucesso." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      },
+      "put": {
+        "tags": ["Users"], "summary": "Update authenticated user's profile",
+        "security": [{ "sanctum": [] }],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "maxLength": 255, "example": "John Doe" },
+              "username": { "type": "string", "maxLength": 30, "example": "johndoe" },
+              "bio": { "type": "string", "maxLength": 500, "nullable": true, "example": "Software developer" }
+            }
+          }}}
+        },
+        "responses": {
+          "200": { "description": "Updated user", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/users/me/avatar": {
+      "post": {
+        "tags": ["Users"], "summary": "Upload avatar for authenticated user",
+        "security": [{ "sanctum": [] }],
+        "requestBody": {
+          "required": true,
+          "content": { "multipart/form-data": { "schema": { "type": "object", "required": ["avatar"], "properties": { "avatar": { "type": "string", "format": "binary", "description": "Image file (max 2 MB)" } } } } }
+        },
+        "responses": {
+          "200": { "description": "Updated user with new avatar", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "422": { "$ref": "#/components/responses/ValidationError" }
+        }
+      }
+    },
+    "/users/{username}": {
+      "get": {
+        "tags": ["Users"], "summary": "Get a user's public profile",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "username", "in": "path", "required": true, "schema": { "type": "string" }, "example": "johndoe" }],
+        "responses": {
+          "200": { "description": "User profile", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/User" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/users/{id}/posts": {
+      "get": {
+        "tags": ["Users"], "summary": "Get posts by a user",
+        "security": [{ "sanctum": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } },
+          { "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 15, "maximum": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "User's posts", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedPosts" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/users/{id}/follow": {
+      "post": {
+        "tags": ["Follows"], "summary": "Follow a user",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Now following", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Seguindo." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/users/{id}/unfollow": {
+      "delete": {
+        "tags": ["Follows"], "summary": "Unfollow a user",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Unfollowed", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/MessageResponse" }, "example": { "message": "Deixou de seguir." } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/users/{id}/is-following": {
+      "get": {
+        "tags": ["Follows"], "summary": "Check if authenticated user follows a user",
+        "security": [{ "sanctum": [] }],
+        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } }],
+        "responses": {
+          "200": { "description": "Follow status", "content": { "application/json": { "schema": { "type": "object", "properties": { "is_following": { "type": "boolean", "example": true } } } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/users/{id}/followers": {
+      "get": {
+        "tags": ["Follows"], "summary": "List followers of a user",
+        "security": [{ "sanctum": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } },
+          { "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 20, "maximum": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "Paginated followers", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedUsers" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    },
+    "/users/{id}/following": {
+      "get": {
+        "tags": ["Follows"], "summary": "List users a user is following",
+        "security": [{ "sanctum": [] }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "integer" } },
+          { "name": "per_page", "in": "query", "schema": { "type": "integer", "default": 20, "maximum": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "Paginated following list", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/PaginatedUsers" } } } },
+          "401": { "$ref": "#/components/responses/Unauthenticated" }
+        }
+      }
+    }
+  }
+};
+
+SwaggerUIBundle({
+  spec,
+  dom_id: '#swagger-ui',
+  presets: [
+    SwaggerUIBundle.presets.apis,
+    SwaggerUIStandalonePreset,
+  ],
+  plugins: [SwaggerUIBundle.plugins.DownloadUrl],
+  layout: 'StandaloneLayout',
+  deepLinking: true,
+  displayRequestDuration: true,
+  defaultModelsExpandDepth: -1,
+  filter: true,
+  persistAuthorization: true,
+});
+</script>
+</body>
+</html>
